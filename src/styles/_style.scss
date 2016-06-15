@@ -1,0 +1,11 @@
+// HERE THE PROJECT STYLE
+
+
+.test{
+  @include transition(200);
+  @include translate(20px, 100px);
+  width: 100px;
+  height: 100px;
+  background-color: red;
+
+}

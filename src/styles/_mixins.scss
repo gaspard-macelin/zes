@@ -1,0 +1,596 @@
+// MIXINS BASE BY GASPARD + BRUNO 2016 2017 _ LISBOA
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Mozilla based browsers */
+::-moz-selection {
+    background-color: #C29948;
+    color: white;
+}
+
+/* Works in Safari */
+::selection {
+    background-color: #C29948;
+    color: white;
+}
+
+*:focus {
+    outline: none !important;
+}
+
+
+
+body{
+  overflow-x:hidden;
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+a{
+    color: gray;
+    @include transition(200);
+    &:hover{
+        text-decoration: none;
+        color: #b20000;
+    }
+
+}
+
+/*img*/
+
+img{
+    width: 100%;
+}
+
+img{
+  -webkit-backface-visibility: hidden;
+}
+
+.img-100{
+   width: 100%;
+}
+
+
+@mixin background-image-svg($img-name, $png-directory: "png-fallback/") {
+  background-image: image-url($img-name + ".svg");
+  // This function will add the image to the list of images to preload.
+  // The function is defined below.
+  $tmp: preload-image($img-name + ".svg");
+  // no-svg is defined by Modernizr
+  .no-svg & { background-image: image-url($png-directory + $img-name + ".png"); }
+}
+
+$preloaded-images: null;
+@function preload-image($image-url) {
+  $preloaded-images: $preloaded-images url($image-url);
+  @return $preloaded-images;
+}
+
+
+body:before {
+  display: none;
+  content: $preloaded-images;
+}
+
+
+// POSITION
+
+
+.relative{
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.fixed{
+    position: fixed;
+}
+
+
+/* Remove inner shadow from inputs on mobile iOS */
+textarea, input {
+-webkit-appearance: none;
+}
+
+
+
+// COLOR
+
+$gray-xs: #F3F4F8;
+$gray: #787878;
+$gray-xl: #333338;
+$blue: #2FB4C7;
+
+
+
+.bg-white{
+  background-color: white;
+}
+
+.bg-gray-xs{
+  background-color: $gray-xs;
+}
+
+.bg-gray{
+  background-color: $gray;
+}
+
+.bg-gray-xl{
+  background-color: $gray-xl;
+}
+
+.text-white{
+  color: white;
+}
+
+.text-gray-xs{
+  color: $gray-xs;
+}
+
+.text-gray{
+  color: $gray;
+}
+
+.text-gray-xl{
+  color: $gray-xl;
+}
+
+.text-blue{
+  color: $blue;
+}
+
+
+
+
+
+
+
+
+
+
+
+$xxxs : 5px;
+$xxs : 8px;
+$xs : 15px;
+$sm : 30px;
+$md : 50px;
+$lg : 70px;
+$xl : 120px;
+$xxl : 200px;
+$xxxl : 300px;
+
+
+
+
+
+
+
+
+
+//Responsive
+$iphone: 400px;
+$iphone6: 768px;
+$ipad: 991px;
+$ipadpro: 1100px;
+$desktop: 1300px;
+
+@mixin responsive($width) {
+  @if $width == desktop {
+    @media only screen and (max-width: $desktop) { @content; }
+  }
+  @else if $width == ipadpro {
+    @media only screen and (max-width: $ipadpro) { @content; }
+  }
+  @else if $width == ipad {
+    @media only screen and (max-width: $ipad) { @content; }
+  }
+  @else if $width == iphone6 {
+    @media only screen and (max-width: $iphone6) { @content; }
+  }
+  @else if $width == iphone {
+    @media only screen and (max-width: $iphone) { @content; }
+  }
+  // Non-Retina
+  @else if $width == non-retina {
+    @media screen and (-webkit-max-device-pixel-ratio: 1) { @content; }
+  }
+  // Retina Only
+  @else if $width == retina {
+    @media screen and (-webkit-min-device-pixel-ratio: 2) { @content; }
+  }
+  // Retina Only
+  @else if $width == retina3 {
+    @media screen and (-webkit-min-device-pixel-ratio: 3) { @content; }
+  }
+  // Specific max width
+  @else {
+    @media only screen and (max-width: #{$width}px) { @content; }
+  }
+}
+
+
+
+
+@mixin rounded($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin rotate($deg) {
+  -webkit-transform: rotate($deg);
+  -moz-transform:    rotate($deg);
+  -ms-transform:     rotate($deg);
+  -o-transform:      rotate($deg);
+}
+
+@mixin translate($move, $move2) {
+  transform: translate($move, $move2);
+  -webkit-transform: translate($move, $move2);
+  -moz-transform:    translate($move, $move2);
+  -ms-transform:     translate($move, $move2);
+  -o-transform:      translate($move, $move2);
+}
+
+
+//Y axis : @include centre(y);
+//X axis : @include centre(x);
+  //Both axis : @include centre;
+
+@mixin centre($axis: "both"){
+    position:absolute;
+    @if $axis == "y"{
+        top:50%;
+        @include translate(0%, -50%);
+    }
+    @if $axis == "x"{
+        left:50%;
+        @include translate(-50%, 0%);
+    }
+    @if $axis == "both"{
+        top:50%;
+        left:50%;
+        @include translate(-50%, -50%);
+    }
+}
+
+
+
+
+
+
+​
+
+
+
+
+
+
+.text-ellipsis{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.text-justify{
+  text-align: justify;
+}
+
+.wordbreak{
+  word-break: break-all;
+}
+
+
+
+// ---------- utilities ----------
+
+.row-same-height{
+    display: table;
+    width: 100%;
+}
+
+.col-same-height{
+    display: table-cell;
+    float: none !important;
+}
+
+
+.height-xs{
+  height: $xs;
+}
+.height-sm{
+  height: $sm;
+}
+.height-md{
+  height: $md;
+}
+.height-xl{
+  height: $xl;
+}
+.height-xxl{
+  height: $xxl;
+}
+
+.height-max-xs{
+  max-height: $xs;
+}
+.height-max-sm{
+  max-height: $sm;
+}
+.height-max-md{
+  max-height: $md;
+}
+.height-max-xxl{
+  max-height: $xxl;
+}
+
+.width-max-xs{
+  max-width: $xs;
+}
+.width-max-sm{
+  max-width: $sm;
+}
+.width-max-md{
+  max-width: $md;
+}
+.width-max-xl{
+  max-width: $xl;
+}
+.width-max-xxl{
+  max-width: $xxl;
+}
+
+.height-min-xs{
+  min-height: $xs;
+}
+.height-min-sm{
+  min-height: $sm;
+}
+.height-min-md{
+  min-height: $md;
+}
+.height-min-xxl{
+  min-height: $xxl;
+}
+
+
+// ---------- Paddings - margins ----------
+
+
+.padding-bottom-xs{
+  padding-bottom: $xs;
+}
+.padding-bottom-sm{
+  padding-bottom: $sm;
+}
+.padding-bottom-md{
+  padding-bottom: $md;
+}
+.padding-bottom-lg{
+  padding-bottom: $lg;
+}
+.padding-bottom-xl{
+  padding-bottom: $xl;
+}
+.padding-top-zero{
+  padding-top: 0px !important;
+}
+.padding-top-xxs{
+  padding-top: $xxs;
+}
+.padding-top-xs{
+  padding-top: $xs;
+}
+.padding-top-sm{
+  padding-top: $sm;
+}
+.padding-top-md{
+  padding-top: $md;
+}
+.padding-top-lg{
+  padding-top: $lg;
+}
+.padding-top-xl{
+  padding-top: $xl;
+}
+.padding-left-zero{
+  padding-left: 0;
+}
+.padding-left-xxxs{
+  padding-left: $xxxs;
+}
+.padding-left-xxs{
+  padding-left: $xxs;
+}
+.padding-left-xs{
+  padding-left: $xs;
+}
+.padding-left-sm{
+  padding-left: $sm;
+}
+.padding-left-md{
+  padding-left: $md;
+}
+
+.padding-right-zero{
+  padding-right: 0;
+}
+.padding-right-xxxs{
+  padding-right: $xxxs;
+}
+.padding-right-xxs{
+  padding-right: $xxs;
+}
+.padding-right-xs{
+  padding-right: $xs;
+}
+.padding-right-sm{
+  padding-right: $sm;
+}
+.padding-right-md{
+  padding-right: $md;
+}
+.padding-section{
+  padding-top: $lg;
+  padding-bottom: $lg;
+}
+.padding-xs{
+  padding: $xs;
+}
+.padding-sm{
+  padding: $sm;
+}
+.padding-md{
+  padding: $md;
+}
+.padding-lg{
+  padding: $lg;
+}
+.padding-xl{
+  padding: $xl;
+}
+
+
+// ---------- margins
+
+.margin-bottom-zero{
+  margin-bottom: 0px !important;
+}
+
+.margin-bottom-xxs{
+  margin-bottom: $xxs;
+}
+.margin-bottom-xs{
+  margin-bottom: $xs;
+}
+.margin-bottom-sm{
+  margin-bottom: $sm;
+}
+.margin-bottom-md{
+  margin-bottom: $md;
+}
+.margin-bottom-lg{
+  margin-bottom: $lg;
+}
+.margin-bottom-xl{
+  margin-bottom: $xl;
+}
+.margin-bottom-zero{
+  margin-bottom: 0px;
+}
+.margin-top-zero{
+  margin-top: 0px;
+}
+
+.margin-top-xxs{
+  margin-top: $xxs;
+}
+.margin-top-xs{
+  margin-top: $xs;
+}
+.margin-top-sm{
+  margin-top: $sm;
+}
+.margin-top-md{
+  margin-top: $md;
+}
+.margin-top-lg{
+  margin-top: $lg;
+}
+.margin-top-xl{
+  margin-top: $xl;
+}
+.margin-left-xxxs{
+  margin-left: $xxxs;
+}
+.margin-left-xxs{
+  margin-left: $xxs;
+}
+.margin-left-xs{
+  margin-left: $xs;
+}
+.margin-left-sm{
+  margin-left: $sm;
+}
+.margin-left-xl{
+  margin-left: $xl;
+}
+
+.margin-left-md{
+  margin-left: $md;
+}
+.margin-right-xxxs{
+  margin-right: $xxxs;
+}
+.margin-right-xxs{
+  margin-right: $xxs;
+}
+.margin-right-xs{
+  margin-right: $xs;
+}
+.margin-right-sm{
+  margin-right: $sm;
+}
+.margin-right-md{
+  margin-right: $md;
+}
+.margin-xs{
+  margin: $xs;
+}
+.margin-sm{
+  margin: $sm;
+}
+.margin-md{
+  margin: $md;
+}
+.margin-lg{
+  margin: $lg;
+}
+.margin-xl{
+  margin: $xl;
+}
+
+
+// ---------- Buttons ----------
+
+.btn{
+    border-radius: 0;
+}
+.btn-xs{
+   font-size: 12px !important;;
+    padding: 4px 7px !important;;
+}
+
+.btn-md{
+    padding: 15px 15px;
+}
+
+.btn-xl{
+    padding: 20px 30px;
+}
+
+.btn-xl2{
+    padding: 25px 60px;
+    font-size: 14px !important;
+}
+
+.btn-base {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}

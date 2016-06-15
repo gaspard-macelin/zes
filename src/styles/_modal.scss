@@ -1,0 +1,48 @@
+/*MODAL*/
+
+
+
+.modal {
+    position: absolute;
+    overflow: auto;
+}
+
+.modal.fade .modal-dialog {
+    @include transition(200);
+    -webkit-transform: translate(0, 0%);
+    -ms-transform: translate(0, 0%);
+    -o-transform: translate(0, 0%);
+    transform: translate(0, 0%);
+}
+
+.modal-content {
+    position: relative;
+    background-color: rgba(0,0,0,0);
+    background-color: transparent;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 0px solid #999;
+    border: 0px solid rgba(0,0,0,0);
+    border-radius: 0px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,0);
+    box-shadow: 0 3px 9px rgba(0,0,0,0);
+    padding: 20px 20%;
+    // overflow-y: scroll;
+    height: 100%;
+}
+
+.modal-dialog {
+    width: 100%;
+    margin: 0px auto;
+    height: 100%;
+}
+
+.modal-backdrop.in {
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+
+body.modal-open {
+    overflow: visible;
+}

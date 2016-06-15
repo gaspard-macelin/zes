@@ -1,0 +1,15 @@
+
+@mixin transition($duration) {
+  -webkit-transition: all #{$duration}ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  -moz-transition:    all #{$duration}ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  -ms-transition:     all #{$duration}ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  -o-transition:      all #{$duration}ms cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+
+@mixin animatedelay($delay) {
+  animation-delay: #{$delay}s;
+  -webkit-animation-delay:  #{$delay}s;
+  -moz-animation-delay:  #{$delay}s;
+  -ms-animation-delay:  #{$delay}s;
+  -o-animation-delay:  #{$delay}s;
+}
